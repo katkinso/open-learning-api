@@ -25,6 +25,7 @@ module.exports = {
       secret: process.env.cookieSecret,
       resave: false,
       saveUninitialized: false,
+      proxy: true, // add this line
       cookie: { 
         maxAge: 1.21e+9, //set cookie to expire in 14 days
         httpOnly: false 
