@@ -9,7 +9,7 @@ const passportConfig = require("./passport-config");
 const cors = require("cors");
 
 var allowedOrigins = ['http://localhost:3000',
-                      'https://open-learning-client.herokuapp.com'];
+                      'https://open-learning.herokuapp.com'];
 
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
     app.use(cors({
-        "origin": "https://open-learning-client.herokuapp.com",
+        "origin": "https://open-learning.herokuapp.com",
         "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
         "preflightContinue": false,
         "optionsSuccessStatus": 204,
