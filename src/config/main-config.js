@@ -16,7 +16,7 @@ module.exports = {
     app.set("view engine", "ejs");
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
-    app.enable('trust proxy'); // add this line
+    app.set('trust proxy', 1); // add this line
     app.use(cors({
       credentials: true,
       origin: 'https://open-learning.herokuapp.com',
