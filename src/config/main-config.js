@@ -8,6 +8,9 @@ const flash = require("express-flash");
 const passportConfig = require("./passport-config");
 const cors = require("cors");
 
+var allowedOrigins = ['http://localhost:3000',
+                      'https://open-learning-client.herokuapp.com/'];
+
 
 module.exports = {
   init(app, express){
@@ -15,10 +18,24 @@ module.exports = {
     app.set("view engine", "ejs");
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
+    // app.use(cors({
+    //   credentials: true,
+    //   // origin: 'http://localhost:3000',
+    //   origin: 'https://open-learning-client.herokuapp.com',
+    // }));
     app.use(cors({
       credentials: true,
-      // origin: 'http://localhost:3000',
-      origin: 'https://open-learning-client.herokuapp.com',
+      origin: function(origin, callback){
+        // allow requests with no origin 
+        // (like mobile apps or curl requests)
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) === -1){
+          var msg = 'The CORS policy for this site does not ' +
+                    'allow access from the specified Origin.';
+          return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+      }
     }));
     app.use(express.json())
     app.use(session({
