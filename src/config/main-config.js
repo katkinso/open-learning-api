@@ -17,10 +17,15 @@ module.exports = {
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
     app.set('trust proxy', 1); // add this line
-    app.use(cors({
-      credentials: true,
-      origin: 'https://open-learning.herokuapp.com',
-    }));
+//CORS bypass
+app.use(function(req, res, next) {
+  //must be included these first two
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+next();
+});
     app.use(express.json())
     app.use(session({
       secret: process.env.cookieSecret,
@@ -29,7 +34,7 @@ module.exports = {
       proxy: true, // add this line
       cookie: { 
         maxAge: 1.21e+9, //set cookie to expire in 14 days
-        // httpOnly: false 
+        httpOnly: false 
       } 
     }));
     app.use(flash());
