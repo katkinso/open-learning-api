@@ -29,7 +29,7 @@ module.exports = {
       proxy: true, // add this line
       cookie: { 
         maxAge: 1.21e+9, //set cookie to expire in 14 days
-        httpOnly: false 
+        // httpOnly: false 
       } 
     }));
     app.use(flash());
