@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const passportConfig = require("./passport-config");
 const cors = require("cors");
 
+
 module.exports = {
   init(app, express){
     app.set("views", viewsFolder);
@@ -16,7 +17,8 @@ module.exports = {
     // app.use(expressValidator());
     app.use(cors({
       credentials: true,
-      origin: 'http://localhost:3000'
+      // origin: 'http://localhost:3000',
+      origin: 'https://open-learning-client.herokuapp.com',
     }));
     app.use(express.json())
     app.use(session({
