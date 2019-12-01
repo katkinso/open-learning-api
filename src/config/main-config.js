@@ -9,7 +9,7 @@ const passportConfig = require("./passport-config");
 const cors = require("cors");
 
 var allowedOrigins = ['http://localhost:3000',
-                      'https://open-learning-client.herokuapp.com/'];
+                      'https://open-learning-client.herokuapp.com'];
 
 
 module.exports = {
@@ -19,9 +19,12 @@ module.exports = {
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
     app.use(cors({
-      credentials: true,
-      // origin: 'http://localhost:3000',
-      origin: 'https://open-learning-client.herokuapp.com',
+        "origin": "https://open-learning-client.herokuapp.com",
+        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "preflightContinue": false,
+        "optionsSuccessStatus": 204,
+        credentials: true
+    
     }));
     // app.use(cors({
     //   credentials: true,
@@ -36,7 +39,7 @@ module.exports = {
     //     }
     //     return callback(null, true);
     //   }
-    }));
+    // }));
     app.use(express.json())
     app.use(session({
       secret: process.env.cookieSecret,
